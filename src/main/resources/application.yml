@@ -1,0 +1,14 @@
+zuul:
+  routes:
+    bar:
+      serviceId: foo
+      path: /foo
+      stripPrefix: true
+
+foo:
+  ribbon:
+    listOfServers: localhost:9080
+
+bar:
+  ribbon:
+    listOfServers: localhost:7080
