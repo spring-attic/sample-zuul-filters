@@ -12,7 +12,9 @@ There are a number of filters are implemented:
 - `AddResponseHeaderFilter`: adds a random `X-Foo` header to the response
 - `ModifyResponseBodyFilter`: Adds a prefix to the response using `RequestContext.setResponseBody(String)`. Only runs if `service` query parameter is NOT set.
 - `ModifyResponseDataStreamFilter`: Adds a prefix to the response using `RequestContext.setResponseDataStream(InputStream)`. Only runs if `service` query parameter is set.
+- `PrefixRequestEntityFilter`: Adds a prefix to the request body by using a request wrapper and `RequestContext.setRequest()`. Only runs if `service` query parameter is set.
 - `QueryParamServiceIdPreFilter`: sets the `serviceId` to the value of the `service` query parameter.
+- `UppercaseRequestEntityFilter`: Upper cases the request body by setting `RequestContext.setRequest("requestEntity")`. Only runs if `service` query parameter is NOT set.
 
 ## Examples
 
@@ -54,3 +56,34 @@ The application is routed to `BarApplication` because the response contains `bar
 The `AddResponseHeaderFilter` ran because of the `X-Foo: 9dc2e5fa-a43f-445d-a289-d3e62319413a` header was added to the response.
 
 The `ModifyResponseDataStreamFilter` was run because the body was prefixed with `Modified via setResponseDataStream():`.
+
+```bash
+
+$ echo -n "hello" | http POST :8080/foo
+HTTP/1.1 200 
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 22 Mar 2017 21:48:46 GMT
+Transfer-Encoding: chunked
+X-Application-Context: application
+X-Foo: 69866ea1-db9a-4275-a8f1-5e20d87e5065
+
+Modified via setResponseBody(): foo recieved: HELLO
+```
+
+`UppercaseRequestEntityFilter` was run because `foo recieved: HELLO` was in the response body.
+
+```bash
+
+$ echo -n "hello" | http POST ":8080/foo?service=bar"
+HTTP/1.1 200 
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 22 Mar 2017 21:49:02 GMT
+Transfer-Encoding: chunked
+X-Application-Context: application
+X-Foo: 97aebe27-6845-4dc3-9ef6-80ccdf14059d
+
+Modified via setResponseDataStream(): bar recieved: request body modified via request wrapper: hello
+```
+
+`PrefixRequestEntityFilter` was run because `foo recieved: HELLO` was in the response body.
+
