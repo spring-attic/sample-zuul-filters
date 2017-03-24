@@ -30,6 +30,11 @@ public class ZuulGatewayApplication {
 	}
 
 	@Bean
+	public QueryParamPortPreFilter queryParamPortPreFilter() {
+		return new QueryParamPortPreFilter();
+	}
+
+	@Bean
 	public QueryParamServiceIdPreFilter queryParamServiceIdPreFilter() {
 		return new QueryParamServiceIdPreFilter();
 	}

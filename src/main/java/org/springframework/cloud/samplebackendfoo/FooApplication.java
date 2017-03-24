@@ -26,6 +26,11 @@ public class FooApplication {
 		return "foo recieved: " + body;
 	}
 
+	@RequestMapping(value = "/hello", method = GET)
+	public String hello() {
+		return "hello from " + getClass().getSimpleName();
+	}
+
 	public static void main(String[] args) {
 		new SpringApplicationBuilder(FooApplication.class)
 				.properties("server.port=9080", "spring.application.name=foo")

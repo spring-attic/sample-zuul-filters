@@ -4,6 +4,10 @@ zuul:
       serviceId: foo
       path: /foo
       stripPrefix: true
+    portchange:
+      path: /hello
+      stripPrefix: true
+      url: http://localhost:80
 
 foo:
   ribbon:
