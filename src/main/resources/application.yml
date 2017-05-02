@@ -7,7 +7,7 @@ zuul:
     portchange:
       path: /hello
       stripPrefix: true
-      url: http://localhost:9080
+      url: http://localhost:80
 
 foo:
   ribbon:
