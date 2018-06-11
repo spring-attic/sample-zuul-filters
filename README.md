@@ -86,7 +86,7 @@ X-Foo: 97aebe27-6845-4dc3-9ef6-80ccdf14059d
 Modified via setResponseDataStream(): bar recieved: request body modified via request wrapper: hello
 ```
 
-`PrefixRequestEntityFilter` was run because `foo recieved: HELLO` was in the response body.
+`PrefixRequestEntityFilter` was run because `request body modified via request wrapper` was in the response body.
 
 ```bash
 $ http :8080/hello
