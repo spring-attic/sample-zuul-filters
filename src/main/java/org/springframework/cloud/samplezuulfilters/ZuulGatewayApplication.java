@@ -44,6 +44,11 @@ public class ZuulGatewayApplication {
 		return new UppercaseRequestEntityFilter();
 	}
 
+	@Bean
+	public AddRequestParameterFilter addRequestParameterFilter() {
+		return new AddRequestParameterFilter();
+	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(ZuulGatewayApplication.class, args);
 	}

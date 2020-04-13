@@ -16,6 +16,7 @@ There are a number of filters are implemented:
 - `QueryParamPortPreFilter`: sets the port of the `RequestContext.getRouteHost` to the value of the `port` query parameter. Only runs if `port` query parameter is set.
 - `QueryParamServiceIdPreFilter`: sets the `serviceId` to the value of the `service` query parameter.
 - `UppercaseRequestEntityFilter`: Upper cases the request body by setting `RequestContext.setRequest("requestEntity")`. Only runs if `service` query parameter is NOT set.
+- `AddRequestParameterFilter`: Adds a query param by setting `RequestContext.setRequestQueryParams(MultiValueMap<String, String> requestParams)`. Only runs if `service` query parameter is set.
 
 ## Examples
 
@@ -30,7 +31,7 @@ Transfer-Encoding: chunked
 X-Application-Context: application
 X-Foo: 41e04412-84e8-48ac-8d71-cec209eda9ca
 
-Modified via setResponseBody(): foo from FooApplication$$EnhancerBySpringCGLIB$$82229332
+Modified via setResponseBody(): foo from FooApplication$$EnhancerBySpringCGLIB$$82229332, recieved request param: null
 ```
 
 The application is routed to `FooApplication` because the response contains `foo from FooApplication`.
@@ -48,7 +49,7 @@ Transfer-Encoding: chunked
 X-Application-Context: application
 X-Foo: 9dc2e5fa-a43f-445d-a289-d3e62319413a
 
-Modified via setResponseDataStream(): bar from BarApplication$$EnhancerBySpringCGLIB$$a78c1598
+Modified via setResponseDataStream(): bar from BarApplication$$EnhancerBySpringCGLIB$$a78c1598, recieved request param: Test Add Param
 
 ```
 
