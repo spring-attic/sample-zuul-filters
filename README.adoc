@@ -1,0 +1,2 @@
+# sample-zuul-filters is no longer actively maintained by VMware, Inc.
+
